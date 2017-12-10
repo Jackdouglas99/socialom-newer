@@ -32,7 +32,11 @@
 	<div class="container">
 		<div class="row text-center cover-container rounded-b-lg border-b border-l border-r border-black shadow-md @if($user->banner_img == null) bg-blue-darkest @endif">
 			<a>
-				<img src="{{ $user->profile_img }}" alt="">
+				@if($user->profile_img == null)
+					<img src="http://www.skywardimaging.com/wp-content/uploads/2015/11/default-user-image.png" alt="">
+				@else
+					<img src="{{ $user->profile_img }}" alt="">
+				@endif
 			</a>
 			<h1 class="profile-name">
 				{{ $user->name }}
