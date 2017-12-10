@@ -17,8 +17,8 @@ class PostController extends Controller
 		$post->user_id = $request->user()->id;
 		$post->body = $request->body;
 		$post->visibility = $request->visibility;
-		if($request->tags != "")
-			$post->tags = json_encode($request->tags);
+		/*if($request->tags != "")
+			$post->tags = json_encode($request->tags);*/
 		$post->save();
 		return response()->json(['error' => false], 200);
 	}

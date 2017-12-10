@@ -39,18 +39,6 @@
 						<div class="panel-block">
 							<button type="submit" class="button">Post</button>
 							&nbsp;
-							{{--<div class="file has-name">
-								<label class="file-label">
-									<input class="file-input" id="file" type="file" name="resume" disabled="">
-									<span class="file-cta">
-										<i class="fa fa-file" aria-hidden="true"></i>
-									</span>
-									<span class="file-name" id="filename">
-										Choose A File...
-									</span>
-								</label>
-							</div>
-							&nbsp;--}}
 							<div class="control">
 								<div class="select">
 									<select name="visibility" id="postVisibility">
@@ -60,8 +48,7 @@
 									</select>
 								</div>
 							</div>
-							&nbsp;
-							<input class="input" name="postTags" id="postTags" type="tags" placeholder="Tags" >
+							{{--&nbsp;<input class="input" name="postTags" id="postTags" type="tags" placeholder="Tags" >--}}
 						</div>
 					</form>
 				</div>
@@ -73,7 +60,7 @@
 									<p class="card-header-title">
 										<a href="{{ $post->user->profileLink() }}">
 											{{ $post->user->name }}
-										</a> - {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
+										</a>&nbsp;- {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
 									</p>
 									<div class="dropdown is-right is-hoverable">
 										<div class="dropdown-trigger">
@@ -178,7 +165,7 @@
             axios.post('{{ route('api.user.post.new') }}', {
                 body      : $('#postBody').val(),
                 visibility: $('#postVisibility').val(),
-                tags      : $('#postTags').val(),
+                //tags      : $('#postTags').val(),
             })
                 .then(function (response) {
                     toastr.success('The post has been successfully created.', 'Success');
@@ -199,7 +186,7 @@
                         '</div>'
                     );
                     $('#postBody').val('');
-                    $('#postTags').val('');
+                    //$('#postTags').val('');
                 })
                 .catch(function (error) {
                     console.log(error);

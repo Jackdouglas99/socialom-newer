@@ -138,8 +138,8 @@
 									<option value="me">Me Only</option>
 								</select>
 							</div>
-						</div>&nbsp;
-						<input class="input" name="postTags" id="postTags" type="tags" placeholder="Tags" >
+						</div>{{--&nbsp;
+						<input class="input" name="postTags" id="postTags" type="tags" placeholder="Tags" >--}}
 					</div>
 				</form>
 				<div id="posts">
@@ -149,7 +149,10 @@
 							<div class="card">
 								<header class="card-header">
 									<p class="card-header-title">
-										<a href="{{ $post->user->profileLink() }}">{{ $post->user->name }}</a> - {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
+										<a href="{{ $post->user->profileLink() }}">
+											{{ $post->user->name }}
+										</a>
+										&nbsp;- {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
 									</p>
 									<div class="dropdown is-right is-hoverable">
 										<div class="dropdown-trigger">
@@ -254,7 +257,7 @@
             axios.post('{{ route('api.user.post.new') }}', {
                 body      : $('#postBody').val(),
                 visibility: $('#postVisibility').val(),
-                tags      : $('#postTags').val(),
+                //tags      : $('#postTags').val(),
             })
                 .then(function (response) {
                     toastr.success('The post has been successfully created.', 'Success');
@@ -275,7 +278,7 @@
                         '</div>'
                     );
                     $('#postBody').val('');
-                    $('#postTags').val('');
+                    //$('#postTags').val('');
                 })
                 .catch(function (error) {
                     console.log(error);
