@@ -13,11 +13,12 @@ class SettingsController extends Controller
 	{
 		$user = User::where('id', $request->user()->id)->first();
 
-		if($request->username != "")
-			if(User::where('username', $request->username)->count())
+		if($request->username != "") {
+			if (User::where('username', $request->username)->count())
 				return response()->json(['error' => true, 'errorType' => 'Username Exists'], 400);
 
 			$user->username = $request->username;
+		}
 
 		if($request->email != "") {
 			if (User::where('email', $request->email)->count())
