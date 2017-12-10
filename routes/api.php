@@ -16,8 +16,11 @@ use Illuminate\Http\Request;
 Route::group(['middleware' => 'auth:api', 'as' => 'api.'], function(){
 	Route::group(['prefix' => 'user', 'as' => 'user.'], function(){
 		Route::get('/notification/read', 'API\User\NotificationController@markAsRead')->name('notification.markasread');
-		Route::post('/friend-request/send', 'API\User\FriendRequestController@sendFriendRequest')->name('friend-request.send');
-		Route::post('/friend-request/update', 'API\User\FriendRequestController@updateFriendRequest')->name('friend-request.update');
+
+		Route::group(['prefix' => 'friend-request', 'as' => 'friend-request.'], function(){
+			Route::post('send', 'API\User\FriendRequestController@sendFriendRequest')->name('send');
+			Route::post('update', 'API\User\FriendRequestController@updateFriendRequest')->name('update');
+		});
 
 		Route::group(['prefix' => 'report', 'as' => 'report.'], function(){
 			Route::post('/new', 'API\User\ReportController@newReport')->name('new');
