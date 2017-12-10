@@ -115,6 +115,16 @@
 									</form>
 								</div>
 							</div>
+							<div class="navbar-item has-dropdown is-hoverable">
+								<a class="navbar-link" href="#">
+									Admin
+								</a>
+								<div class="navbar-dropdown is-right is-boxed">
+									<a class="navbar-item" href="#">
+										Users
+									</a>
+								</div>
+							</div>
 						@endguest
 					</div>
 				</div>
