@@ -1,0 +1,18 @@
+
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+
+// Variables
+@import "variables";
+
+// Bootstrap
+//@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+@import "~bulma/bulma.sass";
+@import "~bulma-tagsinput/tagsinput.sass";
+@import "~bulma-tooltip/bulma-tooltip.css";
+@import "~bulma-switch/switch.sass";
+@import "~bulma-badge/badge.sass";
+@import "~tailwindcss/dist/tailwind.css";
+@import "~toastr/build/toastr.css";
+@import "~sweetalert2/src/sweetalert2.scss";
+@import "~font-awesome/scss/font-awesome.scss";
