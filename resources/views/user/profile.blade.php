@@ -4,11 +4,13 @@
 	<style>
 		.cover-container{
 			height:300px;
-			background: url({{ $user->banner_img }}) no-repeat center;
-			-webkit-background-size: cover;
-			-moz-background-size: cover;
-			-o-background-size: cover;
-			background-size: cover;
+			@if($user->banner_img != null)
+				background: url({{ $user->banner_img }}) no-repeat center;
+				-webkit-background-size: cover;
+				-moz-background-size: cover;
+				-o-background-size: cover;
+				background-size: cover;
+			@endif
 		}
 		.cover-container a img {
 			margin-top: 20px;
@@ -28,7 +30,7 @@
 
 @section('content')
 	<div class="container">
-		<div class="row text-center cover-container">
+		<div class="row text-center cover-container rounded-b-lg border-b border-l border-r border-black shadow-md @if($user->banner_img == null) bg-blue-darkest @endif">
 			<a>
 				<img src="{{ $user->profile_img }}" alt="">
 			</a>
@@ -123,8 +125,7 @@
 						</p>
 					</div>
 					<div class="panel-block">
-						<button type="submit" class="button">Post</button>
-						&nbsp;
+						<button type="submit" class="button">Post</button>&nbsp;
 						<div class="control">
 							<div class="select">
 								<select name="visibility" id="postVisibility">
@@ -133,8 +134,7 @@
 									<option value="me">Me Only</option>
 								</select>
 							</div>
-						</div>
-						&nbsp;
+						</div>&nbsp;
 						<input class="input" name="postTags" id="postTags" type="tags" placeholder="Tags" >
 					</div>
 				</form>
