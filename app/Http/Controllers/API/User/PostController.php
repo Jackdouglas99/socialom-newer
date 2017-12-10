@@ -30,6 +30,15 @@ class PostController extends Controller
 		return response()->json(['error' => 'false'], 200);
 	}
 
+	public function editPost(Request $request)
+	{
+		$post = Post::find($request->post_id);
+		$post->body = $request->body;
+		$post->visibility = $request->visibility;
+		$post->save();
+		return response()->json(['error' => false], 200);
+	}
+
 	public function likePost(Request $request)
 	{
 		$like = new Like();

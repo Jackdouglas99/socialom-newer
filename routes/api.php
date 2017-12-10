@@ -35,6 +35,7 @@ Route::group(['middleware' => 'auth:api', 'as' => 'api.'], function(){
 		Route::group(['prefix' => 'post', 'as' => 'post.'], function(){
 			Route::post('/new', 'API\User\PostController@newPost')->name('new');
 			Route::post('/delete', 'API\User\PostController@deletePost')->name('delete');
+			Route::post('/edit', 'API\User\PostController@editPost')->name('edit');
 			Route::post('/like', 'API\User\PostController@likePost')->name('like');
 		});
 	});

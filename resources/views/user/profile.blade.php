@@ -175,7 +175,7 @@
 								</header>
 								<div class="card-content">
 									<div class="content">
-										{{ $post->body }}
+										<div id="postBody-{{ $post->id }}">{{ $post->body }}</div>
 										<br>
 										@if($post->tags != "")
 											@foreach(explode(',', json_decode($post->tags)) as $tag)
@@ -188,26 +188,57 @@
 								</div>
 								<footer class="card-footer">
 									@if(\App\Like::where('post_id', $post->id)->where('user_id', Auth::id())->get()->count())
-										<a id="unlike-{{ $post->id }}" href="#" class="card-footer-item" onclick="">UnLike</a>
+										<a id="unlike-{{ $post->id }}" href="#post-{{$post->id}}" class="card-footer-item" onclick="">UnLike</a>
 									@else
-										<a id="like-{{ $post->id }}" href="#" class="card-footer-item" onclick="likePost({{ $post->id }})">Like</a>
+										<a id="like-{{ $post->id }}" href="#post-{{$post->id}}" class="card-footer-item" onclick="likePost({{ $post->id }})">Like</a>
 									@endif
 										<a href="#" class="card-footer-item">Share</a>
 									<a href="#" class="card-footer-item">Comment</a>
 								</footer>
-								@if(Auth::user()->isStaff() && $post->user_id != Auth::id())
+								{{--@if(Auth::user()->isStaff() && $post->user_id != Auth::id())
 									<footer class="card-footer">
 										<a href="#" class="card-footer-item">Edit</a>
 										<a href="#" class="card-footer-item">Delete</a>
-									</footer>
-								@elseif($post->user_id == Auth::user()->id)
+									</footer>--}}
+								@if($post->user_id == Auth::user()->id)
 									<footer class="card-footer">
-										<a href="#" class="card-footer-item" onclick="">Edit</a>
+										<a href="#" class="card-footer-item" data-target="edit-post-model-{{ $post->id }}" onclick="showModal({{ $post->id }})">Edit</a>
 										<a href="#" class="card-footer-item" onclick="deletePost({{ $post->id }})">Delete</a>
 									</footer>
 								@endif
 							</div>
 							<br>
+						</div>
+						<div class="modal" id="edit-post-model-{{ $post->id }}">
+							<div class="modal-background"></div>
+							<div class="modal-card">
+								<header class="modal-card-head">
+									<p class="modal-card-title">Edit Post</p>
+									<button class="delete" aria-label="close" type="button" onclick="hideModal({{ $post->id }})"></button>
+								</header>
+								<form action="{{ route('api.user.post.edit') }}" method="post" id="editPostForm-{{ $post->id }}" onsubmit="editPost({{ $post->id }}); return false;">
+									<section class="modal-card-body">
+										<input type="hidden" name="post_id" value="{{ $post->id }}">
+										<p class="control">
+											<textarea name="body" id="postBodyText-{{$post->id}}" class="textarea" placeholder="Write a new post..." required>{{ $post->body }}</textarea>
+										</p>
+										<br>
+										<div class="control">
+											<div class="select">
+												<select name="visibility" id="postVisibility">
+													<option value="public" @if($post->visibility == "public") checked @endif>Public</option>
+													<option value="friends" @if($post->visibility == "friends") checked @endif>Friends Only</option>
+													<option value="me" @if($post->visibility == "me") checked @endif>Me Only</option>
+												</select>
+											</div>
+										</div>
+									</section>
+									<footer class="modal-card-foot">
+										<button class="button is-success" type="submit">Save changes</button>
+										<button class="button" onclick="hideModal({{ $post->id }})" type="button">Cancel</button>
+									</footer>
+								</form>
+							</div>
 						</div>
 					@endforeach
 					{{ $posts->render() }}
@@ -219,6 +250,13 @@
 
 @section('js')
 	<script>
+        function showModal(post_id) {
+            $("#edit-post-model-"+ post_id).addClass("is-active");
+        }
+        function hideModal(post_id) {
+            $("#edit-post-model-"+ post_id).removeClass("is-active");
+        }
+
         function reportPost(post_id) {
             swal({
                 title              : 'Report a post',
@@ -284,6 +322,18 @@
                     console.log(error);
                 });
         }
+
+        function editPost(post_id) {
+		    axios.post('{{ route('api.user.post.edit') }}', $('#editPostForm-' + post_id).serialize())
+		        .then(function (response) {
+		            toastr.success('Post successfully edited', 'Success');
+		            $('#postBody-'+ post_id).text($('#postBodyText-'+ post_id).val());
+                    $("#edit-post-model-"+ post_id).removeClass("is-active");
+		        })
+		        .catch(function (error) {
+		            console.log(error);
+		        });
+		}
 
         function deletePost(post_id) {
             axios.post('{{ route('api.user.post.delete') }}', {

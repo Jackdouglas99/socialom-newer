@@ -9,7 +9,7 @@
 		<br>
 		<p>These terms and conditions outline the rules and regulations for the use of Socialom‘s Website.</p>
 		<br>
-		<p>Socialom is located at: Doncaster</p>
+		<p>Socialom is located in: Doncaster</p>
 		<br>
 		<p>
 			By accessing this website we assume you accept these terms and conditions.
