@@ -20,5 +20,4 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('', 'User\HomeController@index')->name('index');
 	Route::get('/settings', 'User\SettingsController@index')->name('settings');
 	Route::get('/p/{user}', 'User\ProfileController@getProfile')->name('profile');
-	Route::get('/test/{user_id}/{post_id}', 'API\User\NotificationController@test');
 });

@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Hash;
 
 class SettingsController extends Controller
 {
+	/**
+	 * Updates the user's profile
+	 *
+	 * @param Request $request
+	 * @return \Illuminate\Http\JsonResponse
+	 */
     public function saveProfile(Request $request)
 	{
 		$user = User::where('id', $request->user()->id)->first();
@@ -30,11 +36,20 @@ class SettingsController extends Controller
 		if($request->name != "")
 			$user->name = $request->name;
 
+		if($request->bio != "")
+			$user->bio = $request->bio;
+
 		$user->save();
 
 		return response()->json(['error' => false], 200);
 	}
 
+	/**
+	 * Updates the user's password
+	 *
+	 * @param Request $request
+	 * @return \Illuminate\Http\JsonResponse
+	 */
 	public function savePassword(Request $request)
 	{
 		$user = User::where('id', $request->user()->id)->first();
@@ -52,8 +67,20 @@ class SettingsController extends Controller
 		}
 	}
 
+	/**
+	 * Updates the user's Privacy Settings
+	 *
+	 * @param Request $request
+	 * @return \Illuminate\Http\JsonResponse
+	 */
 	public function savePrivacy(Request $request)
 	{
+		$user = User::find($request->user()->id);
 
+		$user->activity_visibility = $request->activity_visibility;
+
+		$user->save();
+
+		return response()->json(['error' => false], 200);
 	}
 }

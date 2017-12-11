@@ -11,6 +11,12 @@ use App\Http\Controllers\Controller;
 
 class PostController extends Controller
 {
+	/**
+	 * Adds a new post
+	 *
+	 * @param Request $request
+	 * @return \Illuminate\Http\JsonResponse
+	 */
     public function newPost(Request $request)
 	{
 		$post = new Post();
@@ -23,6 +29,12 @@ class PostController extends Controller
 		return response()->json(['error' => false], 200);
 	}
 
+	/**
+	 * Deletes a post
+	 *
+	 * @param Request $request
+	 * @return \Illuminate\Http\JsonResponse
+	 */
 	public function deletePost(Request $request)
 	{
 		$post = Post::where('id', $request->postID)->first();
@@ -30,6 +42,12 @@ class PostController extends Controller
 		return response()->json(['error' => 'false'], 200);
 	}
 
+	/**
+	 * Edits a post
+	 *
+	 * @param Request $request
+	 * @return \Illuminate\Http\JsonResponse
+	 */
 	public function editPost(Request $request)
 	{
 		$post = Post::find($request->post_id);
@@ -39,6 +57,12 @@ class PostController extends Controller
 		return response()->json(['error' => false], 200);
 	}
 
+	/**
+	 * Adds a like to a post and then sends a notification
+	 *
+	 * @param Request $request
+	 * @return \Illuminate\Http\JsonResponse
+	 */
 	public function likePost(Request $request)
 	{
 		$like = new Like();

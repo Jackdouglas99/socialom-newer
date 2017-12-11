@@ -11,6 +11,12 @@ use App\Http\Controllers\Controller;
 
 class FriendRequestController extends Controller
 {
+	/**
+	 * Sends a friend request
+	 *
+	 * @param Request $request
+	 * @return \Illuminate\Http\JsonResponse
+	 */
     public function sendFriendRequest(Request $request)
 	{
 		$friendRequest = new FriendRequest();
@@ -25,6 +31,12 @@ class FriendRequestController extends Controller
 		return response()->json(['error' => false], 200);
 	}
 
+	/**
+	 * Updates a friend request
+	 *
+	 * @param Request $request
+	 * @return \Illuminate\Http\JsonResponse
+	 */
 	public function updateFriendRequest(Request $request)
 	{
 		$friendRequest = FriendRequest::find($request->friendRequestId);
@@ -35,5 +47,7 @@ class FriendRequestController extends Controller
 		$user = User::find($friendRequest->sender_user_id);
 
 		$user->notify(new FriendRequestAcceptedNotification($friendRequest->recipient_user_id, $user->id));
+
+		return response()->json(['error' => false], 200);
 	}
 }

@@ -55,6 +55,15 @@
 									</span>
 								</div>
 							</div>
+							<div class="field">
+								<label class="label">Bio</label>
+								<div class="control has-icons-left has-icons-right">
+									<input name="bio" class="input" type="text" placeholder="Currently: {{ Auth::user()->bio }}">
+									<span class="icon is-small is-left">
+										<i class="fa fa-align-justify"></i>
+									</span>
+								</div>
+							</div>
 						</div>
 					</div>
 					<center>
@@ -103,8 +112,24 @@
 				</form>
 			</div>
 			<div class="container_item" data-item="3">
-				<form action="" class="control" method="post">
-					<h1 class="title">Coming Soon</h1>
+				<form id="privacyForm" action="" class="control" method="post" onsubmit="savePrivacy(); return false;">
+					<div class="columns">
+						<div class="column is-half">
+							<div class="field">
+								<label class="label">Post Visibility</label>
+								<div class="select">
+									<select name="activity_visibility">
+										<option value="public" @if(Auth::user()->activity_visibility == "public") selected @endif>Public</option>
+										<option value="friends" @if(Auth::user()->activity_visibility == "friends") selected @endif>Friends Only</option>
+										<option value="me" @if(Auth::user()->activity_visibility == "me") selected @endif>Me Only</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+					<center>
+						<button type="submit" class="button is-primary">Save</button>
+					</center>
 				</form>
 			</div>
 		</div>
@@ -167,11 +192,13 @@
         }
 
         function savePrivacy() {
-            axios.post('{{ route('api.user.settings.privacy') }}', {
-                PARAM1: 'Fred'
-            })
+            axios.post('{{ route('api.user.settings.privacy') }}', $('#privacyForm').serialize())
                 .then(function (response) {
-                    console.log(response);
+                    swal({
+                        type: 'success',
+                        title: 'Saved',
+                        text: 'Your privacy settings has been successfully updated'
+                    });
                 })
                 .catch(function (error) {
                     console.log(error);

@@ -9,6 +9,12 @@ use App\Http\Controllers\Controller;
 
 class ProfileController extends Controller
 {
+	/**
+	 * Returns a profile with all the user's posts to fill the news feed
+	 *
+	 * @param $user
+	 * @return $this|\Illuminate\Http\JsonResponse
+	 */
     public function getProfile($user)
 	{
 		$userInfo = User::where('id', $user)->orWhere('username', $user)->first();

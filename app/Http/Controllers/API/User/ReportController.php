@@ -9,6 +9,12 @@ use App\Http\Controllers\Controller;
 
 class ReportController extends Controller
 {
+	/**
+	 * Adds a new report
+	 *
+	 * @param Request $request
+	 * @return \Illuminate\Http\JsonResponse
+	 */
     public function newReport(Request $request)
 	{
 		$post = Post::find($request->postID);
