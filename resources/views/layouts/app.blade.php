@@ -73,17 +73,23 @@
 									@if(Auth::user()->unreadNotifications->count())
 										@foreach(Auth::user()->unreadNotifications as $notification)
 											@if($notification->type == "App\Notifications\FriendRequestNotification")
-												<a id="notification" class="navbar-item" href="{{ \App\User::find($notification->data['sender'])->profileLink() }}">
-													{{  \App\User::find($notification->data['sender'])->name  }} Sent you a Friend Request
-												</a>
+												<div class="notif">
+													<a class="navbar-item notification" href="{{ \App\User::find($notification->data['sender'])->profileLink() }}">
+														{{  \App\User::find($notification->data['sender'])->name  }} Sent you a Friend Request
+													</a>
+												</div>
 											@elseif($notification->type == "App\Notifications\FriendRequestAcceptedNotification")
-												<a id="notification" class="navbar-item" href="{{ \App\User::find($notification->data['sender'])->profileLink() }}">
-													{{  \App\User::find($notification->data['sender'])->name  }} Accepted your Friend Request
-												</a>
+												<div class="notif">
+													<a class="navbar-item notification" href="{{ \App\User::find($notification->data['sender'])->profileLink() }}">
+														{{  \App\User::find($notification->data['sender'])->name  }} Accepted your Friend Request
+													</a>
+												</div>
 											@elseif($notification->type == "App\Notifications\PostLiked")
-												<a id="notification" class="navbar-item" href="{{ Auth::user()->profileLink() }}/#post-{{ $notification->data['post_id'] }}">
-													{{  \App\User::find($notification->data['user_id'])->name  }} Liked Your Post
-												</a>
+												<div class="notif">
+													<a class="navbar-item" href="{{ Auth::user()->profileLink() }}/#post-{{ $notification->data['post_id'] }}">
+														{{  \App\User::find($notification->data['user_id'])->name  }} Liked Your Post
+													</a>
+												</div>
 											@endif
 										@endforeach
 										<a class="navbar-item" href="#" onclick="notificationMarkAsRead()">Mark all as read</a>
@@ -140,8 +146,8 @@
 			function notificationMarkAsRead() {
 				axios('{{ route('api.user.notification.markasread') }}')
 					.then(function (response) {
-						$('#notification').remove();
-						console.log(response);
+                        $('.notif').remove();
+                        console.log(response);
 					})
 					.catch(function (error) {
 						console.log(error);
