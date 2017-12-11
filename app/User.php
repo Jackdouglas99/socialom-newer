@@ -44,6 +44,14 @@ class User extends Authenticatable
 		return "http://socialom.dev/p/" . $this->id;
 	}
 
+	public function isVerified()
+	{
+		if($this->verified == 'yes')
+			return true;
+
+		return false;
+	}
+
 	public function posts()
 	{
 		return $this->hasMany(Post::class);

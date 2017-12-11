@@ -152,7 +152,13 @@
 											<p class="card-header-title">
 												<a href="{{ $post->user->profileLink() }}">
 													{{ $post->user->name }}
-												</a>&nbsp;- {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
+												</a>
+												@if($post->user->isVerified())
+													<span class="icon has-text-info tooltip" data-tooltip="This user is verified">
+														<i class="fa fa-check-circle"></i>
+													</span>
+												@endif
+												- {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
 											</p>
 											<div class="dropdown is-right is-hoverable">
 												<div class="dropdown-trigger">
@@ -248,7 +254,13 @@
 										<p class="card-header-title">
 											<a href="{{ $post->user->profileLink() }}">
 												{{ $post->user->name }}
-											</a>&nbsp;- {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
+											</a>
+											@if($post->user->isVerified())
+												<span class="icon has-text-info tooltip" data-tooltip="This user is verified">
+														<i class="fa fa-check-circle"></i>
+													</span>
+											@endif
+											- {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
 										</p>
 										<div class="dropdown is-right is-hoverable">
 											<div class="dropdown-trigger">

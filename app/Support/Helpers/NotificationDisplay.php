@@ -68,11 +68,12 @@
 		 */
 		public static function renderNotification($type, $message)
 		{
-			echo '<div class="alert alert-' . self::changeNotificationType($type) . ' alert-dismissable">' .
+			/*echo '<div class="alert alert-' . self::changeNotificationType($type) . ' alert-dismissable">' .
 				'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button> ' .
 				'<strong>' . ucfirst(self::changeTitleType($type)) . '</strong> ' .
 				$message .
-				'</div>';
+				'</div>';*/
+			echo '<script>toastr.'.$type.'("'.$message.'");</script>';
 		}
 
 	}

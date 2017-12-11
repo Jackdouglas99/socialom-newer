@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
+	public function linkToPost()
+	{
+		return $this->user->profileLink() . "/#post-" . $this->id;
+	}
+
     public function user()
 	{
 		return $this->belongsTo(User::class);

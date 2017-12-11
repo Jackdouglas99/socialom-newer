@@ -20,4 +20,8 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::get('', 'User\HomeController@index')->name('index');
 	Route::get('/settings', 'User\SettingsController@index')->name('settings');
 	Route::get('/p/{user}', 'User\ProfileController@getProfile')->name('profile');
+
+	Route::group(['middleware' => 'admin','prefix' => 'admin', 'as' => 'admin.'], function(){
+		Route::get('', 'Admin\DashboardController@index')->name('dashboard');
+	});
 });

@@ -84,6 +84,13 @@
 														{{  \App\User::find($notification->data['sender'])->name  }} Accepted your Friend Request
 													</a>
 												</div>
+											@elseif($notification->type == "App\Notifications\NewReportNotification")
+												@php($report = \App\Report::find($notification->data['report_id']))
+												<div class="notif">
+													<a class="navbar-item notification" href="#">
+														The post you reported is under review.
+													</a>
+												</div>
 											@elseif($notification->type == "App\Notifications\PostLiked")
 												<div class="notif">
 													<a class="navbar-item" href="{{ Auth::user()->profileLink() }}/#post-{{ $notification->data['post_id'] }}">
@@ -122,7 +129,7 @@
 								</div>
 							</div>
 							<div class="navbar-item has-dropdown is-hoverable">
-								<a class="navbar-link" href="#">
+								<a class="navbar-link" href="{{ route('admin.dashboard') }}">
 									Admin
 								</a>
 								<div class="navbar-dropdown is-right is-boxed">
@@ -142,6 +149,7 @@
 		<!-- Scripts -->
 		<script src="{{ asset('js/app.js') }}"></script>
 		<script src="https://wikiki.github.io/js/tagsinput.js"></script>
+		{!! App\Support\Helpers\NotificationDisplay::displayNotifications() !!}
 		<script>
 			function notificationMarkAsRead() {
 				axios('{{ route('api.user.notification.markasread') }}')
