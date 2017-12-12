@@ -17,6 +17,7 @@ class CreateFriendRequestsTable extends Migration
             $table->increments('id');
             $table->integer('sender_user_id');
             $table->integer('recipient_user_id');
+            $table->enum('status', ['accepted', 'pending', 'declined'])->default('suspended');
             $table->timestamps();
         });
     }

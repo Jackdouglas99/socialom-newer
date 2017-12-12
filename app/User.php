@@ -52,6 +52,14 @@ class User extends Authenticatable
 		return false;
 	}
 
+	public function isSuspended()
+	{
+		if($this->suspended == 'yes')
+			return true;
+
+		return false;
+	}
+
 	public function posts()
 	{
 		return $this->hasMany(Post::class);

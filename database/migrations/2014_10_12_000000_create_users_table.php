@@ -23,7 +23,9 @@ class CreateUsersTable extends Migration
             $table->string('profile_img')->nullable();
             $table->string('banner_img')->nullable();
             $table->string('bio')->nullable();
-            $table->enum('activity_visibility', ['public', 'friends', 'me'])->nullable();
+            $table->enum('verified', ['yes', 'no'])->default('no');
+            $table->enum('suspended', ['yes', 'no'])->default('no');
+            $table->enum('activity_visibility', ['public', 'friends', 'me'])->default('public');
             $table->rememberToken();
             $table->timestamps();
         });
