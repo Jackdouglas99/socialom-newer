@@ -30,7 +30,7 @@ class User extends Authenticatable
 
     public function isStaff()
 	{
-		if($this->role == 'admin' || $this->role == 'support')
+		if($this->role == 'admin')
 			return true;
 
 		return false;

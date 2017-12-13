@@ -4,16 +4,7 @@
 	<div class="container">
 		<br>
 		<div class="columns">
-			<div class="column is-one-third">
-				<div class="panel">
-					<div class="panel-heading">Admin Pages</div>
-					<a href="#" class="panel-block">Users</a>
-					<a href="#" class="panel-block">Posts</a>
-					<a href="#" class="panel-block">Photos</a>
-					<a href="#" class="panel-block">Comments</a>
-					<a href="#" class="panel-block">Reports</a>
-				</div>
-			</div>
+			@include('layouts.admin-menu')
 			<div class="column is-two-thrid">
 				<div class="panel">
 					<div class="panel-heading">Admin Dashboard</div>

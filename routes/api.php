@@ -39,4 +39,14 @@ Route::group(['middleware' => 'auth:api', 'as' => 'api.'], function(){
 			Route::post('/like', 'API\User\PostController@likePost')->name('like');
 		});
 	});
+
+	Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
+		Route::group(['prefix' => 'user', 'as' => 'user.'], function(){
+			Route::post('/updateSuspended', 'API\Admin\UserController@updateSuspended')->name('updateSuspended');
+			Route::post('/updateVerified', 'API\Admin\UserController@updateVerified')->name('updateVerified');
+			Route::post('/updateRole', 'API\Admin\UserController@updateRole')->name('updateRole');
+			Route::post('/updateInfo', 'API\Admin\UserController@updateInfo')->name('updateInfo');
+		});
+
+	});
 });
