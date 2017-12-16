@@ -47,6 +47,8 @@ Route::group(['middleware' => 'auth:api', 'as' => 'api.'], function(){
 			Route::post('/updateRole', 'API\Admin\UserController@updateRole')->name('updateRole');
 			Route::post('/updateInfo', 'API\Admin\UserController@updateInfo')->name('updateInfo');
 		});
-
+		Route::group(['prefix' => 'post', 'as' => 'post.'], function(){
+			Route::post('/updatePost', 'API\User\PostController@editPost')->name('updatePost');
+		});
 	});
 });

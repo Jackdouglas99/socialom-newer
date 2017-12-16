@@ -24,6 +24,9 @@ Route::group(['middleware' => 'auth'], function(){
 	Route::group(['middleware' => 'admin','prefix' => 'admin', 'as' => 'admin.'], function(){
 		Route::get('', 'Admin\DashboardController@index')->name('dashboard');
 		Route::get('/users', 'Admin\UserController@users')->name('users');
-		Route::get('/user/{user_id}', 'Admin\UserController@user')->name('user');
+		Route::get('/users/{user_id}/view', 'Admin\UserController@user')->name('user');
+		Route::get('/posts', 'Admin\PostController@posts')->name('posts');
+		Route::get('/posts/{post_id}/view', 'Admin\PostController@post')->name('post');
+		Route::get('/posts/{post_id}/delete', 'Admin\PostController@deletePost')->name('post.delete');
 	});
 });

@@ -128,16 +128,11 @@
 									</form>
 								</div>
 							</div>
-							<div class="navbar-item has-dropdown is-hoverable">
-								<a class="navbar-link" href="{{ route('admin.dashboard') }}">
+							@if(Auth::user()->role == "admin")
+								<a class="navbar-item" href="{{ route('admin.dashboard') }}">
 									Admin
 								</a>
-								<div class="navbar-dropdown is-right is-boxed">
-									<a class="navbar-item" href="#">
-										Users
-									</a>
-								</div>
-							</div>
+							@endif
 						@endguest
 					</div>
 				</div>

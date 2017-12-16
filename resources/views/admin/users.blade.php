@@ -39,8 +39,14 @@
 								<td>{{ $user->role }}</td>
 								<td>@if($user->isVerified()) Yes @else No @endif</td>
 								<td>
-									<a href="{{ route('admin.user', $user->id) }}" class="button is-small is-primary is-outlined">Edit</a>
-									<a href="{{ $user->profileLink() }}" target="_blank" class="button is-small is-link is-outlined">View</a>
+									<div class="field has-addons">
+										<p class="control">
+											<a href="{{ route('admin.user', $user->id) }}" class="button is-small is-primary is-outlined">Edit</a>
+										</p>
+										<p class="control">
+											<a href="{{ $user->profileLink() }}" target="_blank" class="button is-small is-link is-outlined">View</a>
+										</p>
+									</div>
 								</td>
 							</tr>
 						@endforeach

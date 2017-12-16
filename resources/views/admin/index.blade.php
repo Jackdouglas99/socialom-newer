@@ -22,7 +22,7 @@
 								</a>
 							@endforeach
 							<div class="panel-block">
-								<a class="button is-link is-outlined is-fullwidth">
+								<a class="button is-link is-outlined is-fullwidth" href="{{ route('admin.users') }}">
 									View All Users
 								</a>
 							</div>
@@ -37,7 +37,7 @@
 								</a>
 							@endforeach
 							<div class="panel-block">
-								<a class="button is-link is-outlined is-fullwidth">
+								<a class="button is-link is-outlined is-fullwidth" href="{{ route('admin.posts') }}">
 									View All Posts
 								</a>
 							</div>
